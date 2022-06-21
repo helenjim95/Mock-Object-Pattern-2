@@ -35,7 +35,7 @@ class DiscussionTest {
         int expectedNumberOfComments = discussion.getNumberOfComments();
         expect(commentMock.save()).andReturn(false);
         replay(commentMock);
-        discussion.addComment(commentMock);
+        assertFalse(discussion.addComment(commentMock));
         assertEquals(expectedNumberOfComments, discussion.getNumberOfComments());
     }
 
@@ -48,5 +48,10 @@ class DiscussionTest {
         String expectedTopic = "Wonder";
         String observedTopic = discussion.getTopic();
         assertEquals(expectedTopic, observedTopic);
+
+        Student charlie = new Student("Charlie", "Puth", LocalDate.parse("1991-12-02"), "Music", "Vocals");
+        expect(courseMock.isDiscussionAllowed(shawn)).andReturn(false);
+        replay(courseMock);
+        assertFalse(discussion.startCourseDiscussion(courseMock, charlie, "LightSwitch"));
     }
 }
