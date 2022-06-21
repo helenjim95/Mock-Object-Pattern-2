@@ -14,28 +14,28 @@ class DiscussionTest {
 
     // TODO implement the tests
     @TestSubject
-    Discussion Discussion = new Discussion();
+    Discussion discussion = new Discussion();
 
     @Mock
-    Comment commentMock;
-    Course courseMock;
+    private Comment commentMock;
+    private Course courseMock;
 
     @Test
     void testComment() {
-        int expectedNumberOfComments = Discussion.getNumberOfComments() + 1;
+        int expectedNumberOfComments = discussion.getNumberOfComments() + 1;
         expect(commentMock.save()).andReturn(true);
         replay(courseMock);
-        Discussion.addComment(commentMock);
-        assertEquals(expectedNumberOfComments, Discussion.getNumberOfComments());
+        discussion.addComment(commentMock);
+        assertEquals(expectedNumberOfComments, discussion.getNumberOfComments());
     }
 
     @Test
     void testCommentIfSavingFails() {
-        int expectedNumberOfComments = Discussion.getNumberOfComments();
+        int expectedNumberOfComments = discussion.getNumberOfComments();
         expect(commentMock.save()).andReturn(false);
         replay(courseMock);
-        Discussion.addComment(commentMock);
-        assertEquals(expectedNumberOfComments, Discussion.getNumberOfComments());
+        discussion.addComment(commentMock);
+        assertEquals(expectedNumberOfComments, discussion.getNumberOfComments());
     }
 
     @Test
@@ -43,9 +43,9 @@ class DiscussionTest {
         Student shawn = new Student("Shawn", "Mendes", LocalDate.parse("1998-08-08"), "Music", "Portuguese");
         expect(courseMock.isDiscussionAllowed(shawn)).andReturn(true);
         replay(courseMock);
-        assertTrue(Discussion.startCourseDiscussion(courseMock, shawn, "Wonder"));
-        String expected_topic = "Wonder";
-        String observed_topic = Discussion.getTopic();
-        assertEquals(expected_topic, observed_topic);
+        assertTrue(discussion.startCourseDiscussion(courseMock, shawn, "Wonder"));
+        String expectedTopic = "Wonder";
+        String observedTopic = discussion.getTopic();
+        assertEquals(expectedTopic, observedTopic);
     }
 }
