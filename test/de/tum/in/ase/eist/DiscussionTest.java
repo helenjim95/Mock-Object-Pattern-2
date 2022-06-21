@@ -14,10 +14,11 @@ class DiscussionTest {
 
     // TODO implement the tests
     @TestSubject
-    Discussion discussion = new Discussion();
+    private Discussion discussion = new Discussion();
 
     @Mock
     private Comment commentMock;
+    @Mock
     private Course courseMock;
 
     @Test
@@ -33,7 +34,7 @@ class DiscussionTest {
     void testCommentIfSavingFails() {
         int expectedNumberOfComments = discussion.getNumberOfComments();
         expect(commentMock.save()).andReturn(false);
-        replay(courseMock);
+        replay(commentMock);
         discussion.addComment(commentMock);
         assertEquals(expectedNumberOfComments, discussion.getNumberOfComments());
     }
