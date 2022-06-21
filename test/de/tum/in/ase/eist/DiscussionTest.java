@@ -25,7 +25,7 @@ class DiscussionTest {
     void testComment() {
         int expectedNumberOfComments = discussion.getNumberOfComments() + 1;
         expect(commentMock.save()).andReturn(true);
-        replay(courseMock);
+        replay(commentMock);
         discussion.addComment(commentMock);
         assertEquals(expectedNumberOfComments, discussion.getNumberOfComments());
     }
