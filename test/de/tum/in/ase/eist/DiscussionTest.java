@@ -46,6 +46,7 @@ class DiscussionTest {
         expect(courseMock.isDiscussionAllowed(shawn)).andReturn(true);
         replay(courseMock);
         assertTrue(discussion.startCourseDiscussion(courseMock, shawn, "Wonder"));
+        assertFalse(discussion.startCourseDiscussion(courseMock, shawn, "Wonder"));
         String expectedTopic = "Wonder";
         String observedTopic = discussion.getTopic();
         assertEquals(expectedTopic, observedTopic);
