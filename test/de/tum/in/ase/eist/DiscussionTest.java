@@ -41,19 +41,14 @@ class DiscussionTest {
 
     @Test
     void testStartCourseDiscussion() {
-
         Student shawn = new Student("Shawn", "Mendes", LocalDate.parse("1998-08-08"), "Music", "Portuguese");
         expect(courseMock.isDiscussionAllowed(shawn)).andReturn(true);
         replay(courseMock);
         assertTrue(discussion.startCourseDiscussion(courseMock, shawn, "Wonder"));
-        assertFalse(discussion.startCourseDiscussion(courseMock, shawn, "Wonder"));
         String expectedTopic = "Wonder";
         String observedTopic = discussion.getTopic();
+        Course observedCourse = discussion.getCourse();
         assertEquals(expectedTopic, observedTopic);
-
-//        Student charlie = new Student("Charlie", "Puth", LocalDate.parse("1991-12-02"), "Music", "Vocals");
-//        expect(courseMock.isDiscussionAllowed(shawn)).andReturn(false);
-//        replay(courseMock);
-//        assertFalse(discussion.startCourseDiscussion(courseMock, charlie, "LightSwitch"));
+        assertEquals(courseMock, observedCourse);
     }
 }
